@@ -1,5 +1,5 @@
 const { AkairoClient, CommandHandler } = require('discord-akairo');
-const { token } = require('config.json');
+const { token } = require('./config.json');
 class MyClient extends AkairoClient
 {
 	constructor()
