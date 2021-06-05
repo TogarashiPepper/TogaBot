@@ -1,4 +1,4 @@
-const { AkairoClient, CommandHandler } = require('discord-akairo');
+const { AkairoClient, CommandHandler, ListenerHandler } = require('discord-akairo');
 const { token } = require('./config.json');
 class MyClient extends AkairoClient
 {
@@ -18,6 +18,10 @@ class MyClient extends AkairoClient
 			handleEdits: true,
 			commandUtil: true,
 		});
+		this.listenerHandler = new ListenerHandler(this, {
+			directory: './listeners/',
+		});
+
 		this.commandHandler.resolver.addType('customMember', async (message, member) =>
 		{
 			if(message.mentions.users.first())
@@ -30,6 +34,8 @@ class MyClient extends AkairoClient
 				return await message.guild.members.fetch(member).catch(e=>{console.log(e);});
 			}
 		});
+		this.commandHandler.useListenerHandler(this.listenerHandler);
+		this.listenerHandler.loadAll();
 		this.commandHandler.loadAll();
 	}
 }
