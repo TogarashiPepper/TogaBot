@@ -12,7 +12,7 @@ class buttonCommand extends Command
 	exec(message)
 	{
 		const oneButton = new MessageButton().setCustomID('1').setLabel('1').setStyle('PRIMARY');
-		const delButton = new MessageButton().setCustomID('delete').setLabel('delete').setStyle('SECONDARY');
+		const delButton = new MessageButton().setCustomID(`delete-${message.author.id}`).setLabel('delete').setStyle('SECONDARY');
 
 		const row = new MessageActionRow().addComponents(oneButton, delButton);
 		message.channel.send('ello', { components: [row] });
