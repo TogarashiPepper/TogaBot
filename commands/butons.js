@@ -11,7 +11,7 @@ class buttonCommand extends Command
 
 	exec(message)
 	{
-		const oneButton = new MessageButton().setCustomID('1').setLabel('1').setStyle('PRIMARY');
+		const oneButton = new MessageButton().setCustomID(`1-${message.author.id}`).setLabel('1').setStyle('PRIMARY');
 		const delButton = new MessageButton().setCustomID(`delete-${message.author.id}`).setLabel('delete').setStyle('SECONDARY');
 
 		const row = new MessageActionRow().addComponents(oneButton, delButton);
