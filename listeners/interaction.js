@@ -17,27 +17,31 @@ class interactionListener extends Listener
 		{
 			const authorID = interaction.customID.split('-');
 			console.log(authorID);
-			const oneButton = new MessageButton().setCustomID(`1-${authorID[1]}`).setLabel('1').setStyle('PRIMARY');
-			const twoButton = new MessageButton().setCustomID(`2-${authorID[1]}`).setLabel('2').setStyle('DANGER');
-			const delButton = new MessageButton().setCustomID(`delete-${authorID[1]}`).setLabel('delete').setStyle('SECONDARY');
-			const row = new MessageActionRow().addComponents(twoButton, delButton);
+			if(authorID[1] === interaction.user.id)
+			{
+				console.log(authorID);
+				const oneButton = new MessageButton().setCustomID(`1-${authorID[1]}`).setLabel('1').setStyle('PRIMARY');
+				const twoButton = new MessageButton().setCustomID(`2-${authorID[1]}`).setLabel('2').setStyle('DANGER');
+				const delButton = new MessageButton().setCustomID(`delete-${authorID[1]}`).setLabel('delete').setStyle('SECONDARY');
+				const row = new MessageActionRow().addComponents(twoButton, delButton);
 
-			const row2 = new MessageActionRow().addComponents(oneButton, delButton);
-			if(interaction.customID.startsWith('delete') && authorID[1] === interaction.user.id)
-			{
-				interaction.message.delete();
-			}
-			if(interaction.customID.startsWith('1'))
-			{
-				interaction.update('hello', { components: [row] });
-			}
-			else if(interaction.customID.startsWith('2'))
-			{
-				interaction.update('hello', { components: [row2] });
+				const row2 = new MessageActionRow().addComponents(oneButton, delButton);
+				if(interaction.customID.startsWith('delete') && authorID[1] === interaction.user.id)
+				{
+					interaction.message.delete();
+				}
+				if(interaction.customID.startsWith('1'))
+				{
+					interaction.update('hello', { components: [row] });
+				}
+				else if(interaction.customID.startsWith('2'))
+				{
+					interaction.update('hello', { components: [row2] });
+				}
 			}
 			else
 			{
-				interaction.deferUpdate();
+				interaction.reply('you don\'t have permissions to use this button or its not registered as a button in my list', { ephemeral: true });
 			}
 		}
 	}
