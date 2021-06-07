@@ -2,15 +2,33 @@ const { AkairoClient, CommandHandler, ListenerHandler } = require('discord-akair
 const { token } = require('./config.json');
 const { Structures } = require('discord.js');
 
-Structures.extend('Guild', Guild => {
-  class CoolGuild extends Guild {
-    constructor(client, data) {
-      super(client, data);
-      this.cool = true;
-    }
+Structures.extend('Message', Message => {
+	class CoolMsg extends Message {
+    constructor(client, data, channel) {
+      super(client, data, channel);
+	  function getAllPropertyNames( obj ) {
+		var props = [];
+	
+		do {
+			Object.getOwnPropertyNames( obj ).forEach(function ( prop ) {
+				if ( props.indexOf( prop ) === -1 ) {
+					props.push( prop );
+				}
+			});
+		} while ( obj = Object.getPrototypeOf( obj ) );
+	
+		return props;
+	}
+	const hiddenKeys = getAllPropertyNames(this);
+
+	this.hidden = {};
+	hiddenKeys.forEach(e => {
+		this.hidden[e] = this[e]
+	})
+}
   }
 
-  return CoolGuild;
+  return CoolMsg;
 });
 class MyClient extends AkairoClient
 {
