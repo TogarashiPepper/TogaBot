@@ -10,7 +10,7 @@ Structures.extend('Message', Message => {
     }
   }
 
-  return CoolGuild;
+  return CoolMesage;
 });
 class MyClient extends AkairoClient
 {
