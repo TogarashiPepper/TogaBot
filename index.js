@@ -2,15 +2,15 @@ const { AkairoClient, CommandHandler, ListenerHandler } = require('discord-akair
 const { token } = require('./config.json');
 const { Structures } = require('discord.js');
 
-Structures.extend('Message', Message => {
-  class CoolMesage extends Message {
+Structures.extend('Guild', Guild => {
+  class CoolGuild extends Guild {
     constructor(client, data) {
       super(client, data);
       this.cool = true;
     }
   }
 
-  return CoolMesage;
+  return CoolGuild;
 });
 class MyClient extends AkairoClient
 {
