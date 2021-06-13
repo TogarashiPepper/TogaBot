@@ -15,7 +15,7 @@ class helpCommand extends Command
 		const c = message.client.commandHandler.modules;
 		c.forEach(e=>arr.push(e.id));
 		const embed = new MessageEmbed().setTitle('commands!').setColor('#0099ff').setDescription(arr.join('\n'));
-		message.channel.send(embed);
+		message.channel.send({ embeds: [embed] });
 
 	}
 }

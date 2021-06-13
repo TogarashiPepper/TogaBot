@@ -1,5 +1,5 @@
-const { Command } = require('discord-akairo');
-const { MessageEmbed } = require('discord.js');
+const {Command} = require('discord-akairo');
+const {MessageEmbed} = require('discord.js');
 class evalCommand extends Command {
 	constructor() {
 		super('eval', {
@@ -30,18 +30,18 @@ class evalCommand extends Command {
 			// if(message.content.match(flagregex)) {
 			// message.flags.push(message.content.match(flagregex)[0]);
 			let evaled = await eval('(async () => {' + result + '})()');
-			if(evaled !== null) {
-				if(typeof evaled != 'string') evaled = require('util').inspect(evaled, { depth: 0 });
+			if (evaled !== null || evaled !== undefined) {
+				if (typeof evaled != 'string') evaled = require('util').inspect(evaled, {depth: 0});
 				message.channel.send(`\`\`\`js\n${evaled}\`\`\``);
 			}
 
 			// }
 		}
-		catch(err) {
+		catch (err) {
 			const embed = new MessageEmbed()
 				.setTitle('there was an error')
-				.setDescription('```' + result + '```' + '\n ```code errored```\n' + '```' + err + '```');
-			message.channel.send(embed);
+				.setDescription('```' + result + '```' + '\n ```code errored```\n' + '```' + err + '```')
+			message.channel.send({embeds: [embed]});
 			console.log(err);
 
 		}

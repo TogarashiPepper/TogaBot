@@ -15,7 +15,7 @@ class buttonCommand extends Command
 		const delButton = new MessageButton().setCustomID(`delete-${message.author.id}`).setLabel('delete').setStyle('SECONDARY');
 
 		const row = new MessageActionRow().addComponents(oneButton, delButton);
-		message.channel.send('ello', { components: [row] });
+		message.channel.send({ content: 'hello', components: [row] });
 	}
 }
 

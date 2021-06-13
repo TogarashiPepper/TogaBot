@@ -32,16 +32,16 @@ class interactionListener extends Listener
 				}
 				if(interaction.customID.startsWith('1'))
 				{
-					interaction.update('hello', { components: [row] });
+					interaction.update({ content: 'hello', components: [row] });
 				}
 				else if(interaction.customID.startsWith('2'))
 				{
-					interaction.update('hello', { components: [row2] });
+					interaction.update({ content: 'hello', components: [row2] });
 				}
 			}
 			else
 			{
-				interaction.reply('you don\'t have permissions to use this button or its not registered as a button in my list', { ephemeral: true });
+				interaction.reply({ content: 'you don\'t have permissions to use this button or its not registered as a button in my list', ephemeral: true });
 			}
 		}
 	}
