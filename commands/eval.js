@@ -50,7 +50,7 @@ class evalCommand extends Command
 			const embed = new MessageEmbed()
 				.setTitle('there was an error')
 				.setDescription('```' + result + '```' + '\n ```code errored```\n' + '```' + err + '```');
-			message.channel.send({ embeds: [embed] });
+			message.channel.send({ embeds: [embed] , components: [row] });
 			console.log(err);
 
 		}
