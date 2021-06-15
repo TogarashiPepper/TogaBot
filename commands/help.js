@@ -1,16 +1,13 @@
 const { Command } = require('discord-akairo');
 const { MessageEmbed } = require('discord.js');
-class helpCommand extends Command
-{
-	constructor()
-	{
+class helpCommand extends Command {
+	constructor() {
 		super('help', {
 			aliases: ['commands', 'help'],
 		});
 	}
 
-	exec(message)
-	{
+	exec(message) {
 		const arr = [];
 		const c = message.client.commandHandler.modules;
 		c.forEach(e=>arr.push(e.id));

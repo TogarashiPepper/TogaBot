@@ -1,19 +1,15 @@
 const { Command } = require('discord-akairo');
 const fetch = require('node-fetch');
-class xkcdCommand extends Command
-{
-	constructor()
-	{
+class xkcdCommand extends Command {
+	constructor() {
 		super('xkcd', {
 			aliases: ['xkcd'],
 		});
 	}
 
-	async exec(message)
-	{
+	async exec(message) {
 		const args = message.content.split(/ +/).slice(1);
-		if (args[0] === 'latest')
-		{
+		if (args[0] === 'latest') {
 			const comic = await fetch('https://xkcd.com/info.0.json');
 			const comicAsText = await comic.text();
 			const comicObject = JSON.parse(comicAsText);
@@ -21,8 +17,7 @@ class xkcdCommand extends Command
 			const sent = await message.channel.send(comicArray[8]);
 			sent.channel.send(comicArray[7]);
 		}
-		if (args[0] === 'specific')
-		{
+		if (args[0] === 'specific') {
 			// eslint-disable-next-line max-statements-per-line
 			if (!args[1]) {message.channel.send('provide a valid id'); return;}
 			const comic = await fetch(`http://xkcd.com/${args[1]}/info.0.json`);
@@ -32,8 +27,7 @@ class xkcdCommand extends Command
 			const sent = await message.channel.send(comicArray[8]);
 			sent.channel.send(comicArray[7]);
 		}
-		if (args[0] === 'random')
-		{
+		if (args[0] === 'random') {
 			const ref = await fetch('https://xkcd.com/info.0.json');
 			const refComicAsText = await ref.text();
 			const refComicObject = JSON.parse(refComicAsText);

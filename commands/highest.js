@@ -1,9 +1,7 @@
 const { Command } = require('discord-akairo');
 
-class HighestRoleCommand extends Command
-{
-	constructor()
-	{
+class HighestRoleCommand extends Command {
+	constructor() {
 		super('highestRole', {
 			aliases: ['highestRole'],
 			args: [
@@ -16,14 +14,11 @@ class HighestRoleCommand extends Command
 		});
 	}
 
-	exec(message, args)
-	{
-		if(args.member)
-		{
+	exec(message, args) {
+		if(args.member) {
 			return message.reply(args.member.roles.highest.toString(), { allowedMentions: { parse: [] } });
 		}
-		else
-		{
+		else {
 			return message.reply('you must supply an ID or a MENTION');
 		}
 	}
