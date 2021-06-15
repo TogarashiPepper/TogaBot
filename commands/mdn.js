@@ -18,7 +18,7 @@ class mdnCommand extends Command
 			const fetched = await fetch(`https://developer.mozilla.org/api/v1/search?q=${search}`);
 			const data = await fetched.json();
 			const embed = await new MessageEmbed().setTitle(data.documents[0].title).setDescription(data.documents[0].summary);
-			message.channel.send(embed);
+			message.channel.send({ embeds: [embed] });
 		}
 		await getmdn().catch((err) =>
 		{
