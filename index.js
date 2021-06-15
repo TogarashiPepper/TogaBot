@@ -2,23 +2,16 @@ const { AkairoClient, CommandHandler, ListenerHandler } = require('discord-akair
 const { token } = require('./config.json');
 const { Structures } = require('discord.js');
 
-Structures.extend('Message', Message =>
-{
-	class CoolMsg extends Message
-	{
-		constructor(client, data, channel)
-		{
+Structures.extend('Message', Message => {
+	class CoolMsg extends Message {
+		constructor(client, data, channel) {
 			super(client, data, channel);
-			function getAllPropertyNames(obj)
-			{
+			function getAllPropertyNames(obj) {
 				const props = [];
 
-				do
-				{
-					Object.getOwnPropertyNames(obj).forEach(function(prop)
-					{
-						if (props.indexOf(prop) === -1)
-						{
+				do {
+					Object.getOwnPropertyNames(obj).forEach(function(prop) {
+						if (props.indexOf(prop) === -1) {
 							props.push(prop);
 						}
 					});
@@ -29,8 +22,7 @@ Structures.extend('Message', Message =>
 			const hiddenKeys = getAllPropertyNames(this);
 
 			this.hidden = {};
-			hiddenKeys.forEach(e =>
-			{
+			hiddenKeys.forEach(e => {
 				this.hidden[e] = this[e];
 			});
 		}
@@ -38,10 +30,8 @@ Structures.extend('Message', Message =>
 
 	return CoolMsg;
 });
-class MyClient extends AkairoClient
-{
-	constructor()
-	{
+class MyClient extends AkairoClient {
+	constructor() {
 		super({
 			ownerID: '779403924850343947', // or ['123992700587343872', '86890631690977280']
 		}, {
@@ -60,15 +50,12 @@ class MyClient extends AkairoClient
 			directory: './listeners/',
 		});
 
-		this.commandHandler.resolver.addType('customMember', async (message, member) =>
-		{
-			if(message.mentions.users.first())
-			{
+		this.commandHandler.resolver.addType('customMember', async (message, member) => {
+			if(message.mentions.users.first()) {
 				const user = message.mentions.users.first();
 				return await message.guild.members.fetch(user.id).catch(e=>{console.log(e);});
 			}
-			else
-			{
+			else {
 				return await message.guild.members.fetch(member).catch(e=>{console.log(e);});
 			}
 		});
