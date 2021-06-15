@@ -23,7 +23,7 @@ class avatarCommand extends Command
 		}
 		else
 		{
-			return message.reply('you must supply an ID or a MENTION', { allowedMentions: { repliedUser: false } });
+			return message.reply({ content: 'you must supply an ID or a MENTION', allowedMentions: { repliedUser: false } });
 		}
 	}
 }
