@@ -33,10 +33,8 @@ class evalCommand extends Command {
 			// if(message.content.match(flagregex)) {
 			// message.flags.push(message.content.match(flagregex)[0]);
 			let evaled = await eval('(async () => {' + result + '})()');
+			if (typeof evaled != 'string') evaled = require('util').inspect(evaled, { depth: 0 });
 			if(`\`\`\`js\n${evaled}\`\`\``.length < 2000) {
-				if (typeof evaled !== 'string') {
-					if (typeof evaled != 'string') evaled = require('util').inspect(evaled, { depth: 0 });
-				}
 				message.channel.send({ content: `\`\`\`js\n${evaled}\`\`\``, components: [row] });
 			}
 			else{
