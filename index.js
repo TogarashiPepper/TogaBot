@@ -36,7 +36,7 @@ class MyClient extends AkairoClient {
 			ownerID: '779403924850343947', // or ['123992700587343872', '86890631690977280']
 		}, {
 			disableMentions: 'everyone',
-			intents: ['GUILDS', 'GUILD_MESSAGES', 'DIRECT_MESSAGES', 'GUILD_PRESENCES'],
+			intents: ['GUILDS', 'GUILD_MEMBERS', 'GUILD_MESSAGES', 'DIRECT_MESSAGES'],
 			partials: ['CHANNEL'],
 		});
 
