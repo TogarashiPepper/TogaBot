@@ -1,5 +1,6 @@
-const { Command } = require('discord-akairo');
-const ms = require('ms');
+import { Command } from 'discord-akairo';
+import { Message, GuildMember } from 'discord.js';
+import ms from 'ms';
 class madeWhenCommand extends Command {
 	constructor() {
 		super('createdAt', {
@@ -14,9 +15,9 @@ class madeWhenCommand extends Command {
 		});
 	}
 
-	exec(message, args) {
+	exec(message: Message, args: { member: GuildMember | null }) {
 		if(args.member) {
-			return message.reply(`${args.member.user.createdAt.toDateString()} or ${ms(Date.now() - args.member.user.createdAt)}`);
+			return message.reply(`${args.member.user.createdAt.toDateString()} or ${ms(Date.now() - args.member.user.createdTimestamp)}`);
 		}
 		else {
 			return message.reply('you must supply an ID or a MENTION');

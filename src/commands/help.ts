@@ -1,5 +1,6 @@
-const { Command } = require('discord-akairo');
-const { MessageEmbed } = require('discord.js');
+import { Command } from 'discord-akairo';
+import { Message, MessageEmbed } from 'discord.js';
+import TogaClient from '../util/TogaClient';
 class helpCommand extends Command {
 	constructor() {
 		super('help', {
@@ -7,9 +8,10 @@ class helpCommand extends Command {
 		});
 	}
 
-	exec(message) {
-		const arr = [];
-		const c = message.client.commandHandler.modules;
+	exec(message: Message) {
+		const arr: string[] = [];
+		const client = message.client as TogaClient;
+		const c = client.commandHandler.modules;
 		c.forEach(e=>arr.push(e.id));
 		const embed = new MessageEmbed().setTitle('commands').setColor('#0099ff').setDescription(arr.join('\n'));
 		message.channel.send({ embeds: [embed] });

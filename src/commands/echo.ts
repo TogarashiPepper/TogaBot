@@ -1,5 +1,5 @@
-const { Command } = require('discord-akairo');
-
+import { Command } from 'discord-akairo';
+import { Message } from 'discord.js';
 class echoCommand extends Command {
 	constructor() {
 		super('echo', {
@@ -7,7 +7,7 @@ class echoCommand extends Command {
 		});
 	}
 
-	exec(message) {
+	exec(message: Message) {
 		message.channel.send(message.content.split(/ +/).slice(1).join(' '));
 	}
 }

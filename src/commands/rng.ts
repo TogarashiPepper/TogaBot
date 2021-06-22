@@ -1,4 +1,5 @@
-const { Command } = require('discord-akairo');
+import { Command } from 'discord-akairo';
+import { Message } from 'discord.js';
 
 class rngCommand extends Command {
 	constructor() {
@@ -14,8 +15,8 @@ class rngCommand extends Command {
 		});
 	}
 
-	exec(message, args) {
-		function getRandomInt(max) {
+	exec(message: Message, args: { numOne: number }) {
+		function getRandomInt(max: number) {
 			return Math.floor(Math.random() * Math.floor(max));
 		}
 		if(args.numOne) {

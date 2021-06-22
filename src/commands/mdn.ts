@@ -1,5 +1,6 @@
-const { Command } = require('discord-akairo');
-const { MessageEmbed } = require('discord.js');
+import { Command } from 'discord-akairo';
+import { Message, MessageEmbed } from 'discord.js';
+import fetch from 'node-fetch';
 class mdnCommand extends Command {
 	constructor() {
 		super('mdn', {
@@ -7,10 +8,9 @@ class mdnCommand extends Command {
 		});
 	}
 
-	async exec(message) {
+	async exec(message: Message) {
 		const search = message.content.split(/ +/).slice(1).join('+');
 		async function getmdn() {
-			const fetch = require('node-fetch');
 			const fetched = await fetch(`https://developer.mozilla.org/api/v1/search?q=${search}`);
 			const data = await fetched.json();
 			const embed = await new MessageEmbed().setTitle(data.documents[0].title).setDescription(data.documents[0].summary);

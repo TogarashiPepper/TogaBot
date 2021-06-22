@@ -1,4 +1,6 @@
-const { Command } = require('discord-akairo');
+import { Command } from 'discord-akairo';
+import { Message, GuildMember } from 'discord.js';
+
 class avatarCommand extends Command {
 	constructor() {
 		super('avatar', {
@@ -13,8 +15,7 @@ class avatarCommand extends Command {
 		});
 	}
 
-	exec(message, args) {
-		console.log(args)
+	exec(message: Message, args: { member: GuildMember | null }) {
 		if(args.member) {
 			return message.channel.send(args.member.user.displayAvatarURL({ size:2048, dynamic: true }));
 		}

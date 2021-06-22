@@ -1,5 +1,5 @@
-const { Command } = require('discord-akairo');
-const { MessageButton, MessageActionRow } = require('discord.js');
+import { Command } from 'discord-akairo';
+import { MessageButton, MessageActionRow, Message } from 'discord.js';
 class buttonCommand extends Command {
 	constructor() {
 		super('button', {
@@ -7,7 +7,7 @@ class buttonCommand extends Command {
 		});
 	}
 
-	exec(message) {
+	exec(message: Message) {
 		const oneButton = new MessageButton().setCustomID(`1-${message.author.id}`).setLabel('1').setStyle('PRIMARY');
 		const delButton = new MessageButton().setCustomID(`delete-${message.author.id}`).setLabel('delete').setStyle('SECONDARY');
 

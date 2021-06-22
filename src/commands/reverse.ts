@@ -1,4 +1,5 @@
-const { Command } = require('discord-akairo');
+import { Command } from 'discord-akairo';
+import { Message } from 'discord.js';
 
 class reverseCommand extends Command {
 	constructor() {
@@ -7,7 +8,7 @@ class reverseCommand extends Command {
 		});
 	}
 
-	exec(message) {
+	exec(message: Message) {
 		const reversed = [...message.content].reverse().join('');
 		return message.channel.send({ content: reversed });
 	}
