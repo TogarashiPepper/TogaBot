@@ -2,6 +2,7 @@ const { Structures, Message } = require('discord.js');
 
 class CoolMsg extends Message {
 	constructor(client, data, channel) {
+		console.log(data)
 		super(client, data, channel);
 		function getAllPropertyNames(obj) {
 			const props = [];

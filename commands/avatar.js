@@ -14,6 +14,7 @@ class avatarCommand extends Command {
 	}
 
 	exec(message, args) {
+		console.log(args)
 		if(args.member) {
 			return message.channel.send(args.member.user.displayAvatarURL({ size:2048, dynamic: true }));
 		}
