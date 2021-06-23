@@ -1,7 +1,7 @@
 import { Message } from 'discord.js';
 import { Command } from 'discord-akairo';
 import fetch from 'node-fetch';
-class activityCommand extends Command {
+export default class activityCommand extends Command {
 	constructor() {
 		super('activity', {
 			aliases: ['activity', 'game'],
@@ -32,5 +32,3 @@ class activityCommand extends Command {
 		}
 	}
 }
-
-module.exports = activityCommand;
