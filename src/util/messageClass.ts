@@ -1,6 +1,6 @@
 import { Message, Client, TextChannel } from 'discord.js';
 
-class CoolMsg extends Message {
+export default class CoolMsg extends Message {
 	hidden: Record<string, unknown>
 	constructor(client: Client, data: Message, channel: TextChannel) {
 		super(client, data, channel);
@@ -27,4 +27,3 @@ class CoolMsg extends Message {
 		 });
 	}
 }
-export = CoolMsg;

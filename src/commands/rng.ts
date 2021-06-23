@@ -1,7 +1,7 @@
 import { Command } from 'discord-akairo';
 import { Message } from 'discord.js';
 
-class rngCommand extends Command {
+export default class rngCommand extends Command {
 	constructor() {
 		super('rng', {
 			aliases: ['randomNum', 'rng'],
@@ -27,5 +27,3 @@ class rngCommand extends Command {
 		}
 	}
 }
-
-module.exports = rngCommand;

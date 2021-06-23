@@ -1,7 +1,8 @@
 import { Command } from 'discord-akairo';
 import { Message } from 'discord.js';
 import fetch from 'node-fetch';
-class xkcdCommand extends Command {
+
+export default class xkcdCommand extends Command {
 	constructor() {
 		super('xkcd', {
 			aliases: ['xkcd'],
@@ -46,5 +47,3 @@ class xkcdCommand extends Command {
 
 	}
 }
-
-module.exports = xkcdCommand;

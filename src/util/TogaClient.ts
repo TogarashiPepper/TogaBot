@@ -1,7 +1,7 @@
 import { AkairoClient, CommandHandler, ListenerHandler } from 'discord-akairo';
 import { Message, Snowflake } from 'discord.js';
 
-class TogaClient extends AkairoClient {
+export class TogaClient extends AkairoClient {
 	commandHandler: CommandHandler;
 	listenerHandler: ListenerHandler;
 
@@ -44,4 +44,3 @@ class TogaClient extends AkairoClient {
 		this.commandHandler.loadAll();
 	}
 }
-export = TogaClient;

@@ -1,7 +1,8 @@
 import { Command } from 'discord-akairo';
 import { Message, GuildMember } from 'discord.js';
 import ms from 'ms';
-class madeWhenCommand extends Command {
+
+export default class madeWhenCommand extends Command {
 	constructor() {
 		super('createdAt', {
 			aliases: ['createdAt', 'getCreationDate'],
@@ -24,5 +25,3 @@ class madeWhenCommand extends Command {
 		}
 	}
 }
-
-module.exports = madeWhenCommand;

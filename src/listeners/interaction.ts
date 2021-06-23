@@ -1,7 +1,7 @@
 import { Listener } from 'discord-akairo';
 import { MessageActionRow, MessageButton, Interaction, Message } from 'discord.js';
 
-class interactionListener extends Listener {
+export default class interactionListener extends Listener {
 	constructor() {
 		super('interaction', {
 			emitter: 'client',
@@ -10,24 +10,41 @@ class interactionListener extends Listener {
 	}
 
 	exec(interaction: Interaction) {
-		if(interaction.isButton() && interaction.componentType == 'BUTTON') {
+		if (interaction.isButton() && interaction.componentType == 'BUTTON') {
 			const authorID = interaction.customID.split('-');
 			console.log(authorID);
-			if(authorID[1] === interaction.user.id) {
+			if (authorID[1] === interaction.user.id) {
 				console.log(authorID);
-				const oneButton = new MessageButton().setCustomID(`1-${authorID[1]}`).setLabel('1').setStyle('PRIMARY');
-				const twoButton = new MessageButton().setCustomID(`2-${authorID[1]}`).setLabel('2').setStyle('DANGER');
-				const delButton = new MessageButton().setCustomID(`delete-${authorID[1]}`).setLabel('delete').setStyle('SECONDARY');
-				const row = new MessageActionRow().addComponents(twoButton, delButton);
 
-				const row2 = new MessageActionRow().addComponents(oneButton, delButton);
-				if(interaction.customID.startsWith('delete') && authorID[1] === interaction.user.id) {
+				const row = new MessageActionRow()
+					.addComponents([
+						new MessageButton()
+							.setCustomID(`2-${authorID[1]}`)
+							.setLabel('2')
+							.setStyle('DANGER'),
+						new MessageButton()
+							.setCustomID(`delete-${authorID[1]}`)
+							.setLabel('delete')
+							.setStyle('SECONDARY')
+					]);
+
+				const row2 = new MessageActionRow().addComponents([
+					new MessageButton()
+						.setCustomID(`1-${authorID[1]}`)
+						.setLabel('1')
+						.setStyle('PRIMARY'),
+					new MessageButton()
+						.setCustomID(`delete-${authorID[1]}`)
+						.setLabel('delete')
+						.setStyle('SECONDARY')
+				]);
+				if (interaction.customID.startsWith('delete') && authorID[1] === interaction.user.id) {
 					(interaction.message as Message).delete();
 				}
-				if(interaction.customID.startsWith('1')) {
+				if (interaction.customID.startsWith('1')) {
 					interaction.update({ content: 'hello', components: [row] });
 				}
-				else if(interaction.customID.startsWith('2')) {
+				else if (interaction.customID.startsWith('2')) {
 					interaction.update({ content: 'hello', components: [row2] });
 				}
 			}
@@ -37,5 +54,3 @@ class interactionListener extends Listener {
 		}
 	}
 }
-
-module.exports = interactionListener;

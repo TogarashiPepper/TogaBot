@@ -20,7 +20,7 @@ async function main(message: Message) {
 }
 
 
-class casinoCommand extends Command {
+export default class casinoCommand extends Command {
 	constructor() {
 		super('coinflip', {
 			aliases: ['cf', 'coinflip'],
@@ -34,5 +34,3 @@ class casinoCommand extends Command {
 		});
 	}
 }
-
-module.exports = casinoCommand;
