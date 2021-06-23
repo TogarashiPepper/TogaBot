@@ -1,6 +1,9 @@
 import { Command } from 'discord-akairo';
 import { MessageEmbed, MessageActionRow, MessageButton, MessageAttachment, Message } from 'discord.js';
 import { inspect } from 'util';
+const delButton = new MessageButton().setCustomID('delete-779403924850343947').setLabel('delete').setStyle('SECONDARY');
+
+const row = new MessageActionRow().addComponents(delButton);
 
 export default class evalCommand extends Command {
 	constructor() {
@@ -12,13 +15,6 @@ export default class evalCommand extends Command {
 
 	async exec(message: Message) {
 		try {
-			const row = new MessageActionRow()
-				.addComponents([
-					new MessageButton()
-						.setCustomID('delete-779403924850343947')
-						.setLabel('delete')
-						.setStyle('SECONDARY')
-				]);
 			// eslint-disable-next-line no-var
 			var result = message.content.split(' ').slice(1).join(' ');
 			// if(message.content.match(flagregex)) {
@@ -40,13 +36,6 @@ export default class evalCommand extends Command {
 			const embed = new MessageEmbed()
 				.setTitle('there was an error')
 				.setDescription('```' + result + '```' + '\n ```code errored```\n' + '```' + err + '```');
-			const row = new MessageActionRow()
-				.addComponents([
-					new MessageButton()
-						.setCustomID('delete-779403924850343947')
-						.setLabel('delete')
-						.setStyle('SECONDARY')
-				]);
 
 			message.channel.send({ embeds: [embed], components: [row] });
 			console.log(err);
