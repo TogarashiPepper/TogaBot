@@ -1,9 +1,7 @@
 import { Command } from 'discord-akairo';
 import { MessageEmbed, MessageActionRow, MessageButton, MessageAttachment, Message } from 'discord.js';
 import { inspect } from 'util';
-const delButton = new MessageButton().setCustomID('delete-779403924850343947').setLabel('delete').setStyle('SECONDARY');
-
-const row = new MessageActionRow().addComponents(delButton);
+import { deleteButton } from '../util/buttons';
 
 export default class evalCommand extends Command {
 	constructor() {
@@ -14,6 +12,8 @@ export default class evalCommand extends Command {
 	}
 
 	async exec(message: Message) {
+		const delButton = deleteButton(message)
+		const row = new MessageActionRow().addComponents(delButton);
 		try {
 			// eslint-disable-next-line no-var
 			var result = message.content.split(' ').slice(1).join(' ');

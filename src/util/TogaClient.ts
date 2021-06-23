@@ -1,7 +1,7 @@
 import { AkairoClient, CommandHandler, ListenerHandler } from 'discord-akairo';
 import { Message, Snowflake } from 'discord.js';
 
-export class TogaClient extends AkairoClient {
+export default class TogaClient extends AkairoClient {
 	commandHandler: CommandHandler;
 	listenerHandler: ListenerHandler;
 
