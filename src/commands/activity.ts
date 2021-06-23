@@ -1,7 +1,8 @@
 import { Message } from 'discord.js';
 import { Command } from 'discord-akairo';
 import fetch from 'node-fetch';
-class activityCommand extends Command {
+
+export default class activityCommand extends Command {
 	constructor() {
 		super('activity', {
 			aliases: ['activity', 'game'],
@@ -27,10 +28,8 @@ class activityCommand extends Command {
 						'Content-Type': 'application/json',
 						'Authorization': 'Bot ' + message.client.token,
            	},
-				}).then(res => res.json()).then(i => message.channel.send({ content: `https://discord.gg/${i.code}` }));
+				}).then((res: any) => res.json()).then((i: any) => message.channel.send({ content: `https://discord.gg/${i.code}` }));
 			}
 		}
 	}
 }
-
-module.exports = activityCommand;

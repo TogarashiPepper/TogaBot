@@ -1,7 +1,8 @@
 import { Command } from 'discord-akairo';
 import { Message, MessageEmbed } from 'discord.js';
 import fetch from 'node-fetch';
-class mdnCommand extends Command {
+
+export default class mdnCommand extends Command {
 	constructor() {
 		super('mdn', {
 			aliases: ['mdn'],
@@ -24,5 +25,3 @@ class mdnCommand extends Command {
 
 	}
 }
-
-module.exports = mdnCommand;

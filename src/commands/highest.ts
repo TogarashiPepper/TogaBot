@@ -1,7 +1,7 @@
 import { Command } from 'discord-akairo';
 import { Message, GuildMember } from 'discord.js';
 
-class HighestRoleCommand extends Command {
+export default class HighestRoleCommand extends Command {
 	constructor() {
 		super('highestRole', {
 			aliases: ['highestRole'],
@@ -24,5 +24,3 @@ class HighestRoleCommand extends Command {
 		}
 	}
 }
-
-module.exports = HighestRoleCommand;

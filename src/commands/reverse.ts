@@ -1,7 +1,7 @@
 import { Command } from 'discord-akairo';
 import { Message } from 'discord.js';
 
-class reverseCommand extends Command {
+export default class reverseCommand extends Command {
 	constructor() {
 		super('reverse', {
 			aliases: ['rv', 'revserse'],
@@ -13,5 +13,3 @@ class reverseCommand extends Command {
 		return message.channel.send({ content: reversed });
 	}
 }
-
-module.exports = reverseCommand;

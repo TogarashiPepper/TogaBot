@@ -1,7 +1,7 @@
 import { Command } from 'discord-akairo';
 import { Message } from 'discord.js';
 
-class pingCommand extends Command {
+export default class pingCommand extends Command {
 	constructor() {
 		super('ping', {
 			aliases: ['ms', 'ping'],
@@ -12,5 +12,3 @@ class pingCommand extends Command {
 		message.channel.send(`Latency is ${Date.now() - message.createdTimestamp}ms. API Latency is ${Math.round(message.client.ws.ping)}ms`);
 	}
 }
-
-module.exports = pingCommand;

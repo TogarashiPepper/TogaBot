@@ -1,6 +1,7 @@
 import { Command } from 'discord-akairo';
 import { MessageButton, MessageActionRow, Message } from 'discord.js';
-class buttonCommand extends Command {
+
+export default class buttonCommand extends Command {
 	constructor() {
 		super('button', {
 			aliases: ['buttons', 'button'],
@@ -15,5 +16,3 @@ class buttonCommand extends Command {
 		message.channel.send({ content: 'hello', components: [row] });
 	}
 }
-
-module.exports = buttonCommand;

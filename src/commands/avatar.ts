@@ -1,7 +1,7 @@
 import { Command } from 'discord-akairo';
 import { Message, GuildMember } from 'discord.js';
 
-class avatarCommand extends Command {
+export default class avatarCommand extends Command {
 	constructor() {
 		super('avatar', {
 			aliases: ['pfp', 'avatar'],
@@ -24,5 +24,3 @@ class avatarCommand extends Command {
 		}
 	}
 }
-
-module.exports = avatarCommand;

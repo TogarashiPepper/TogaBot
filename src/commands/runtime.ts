@@ -1,7 +1,7 @@
 import { Command } from 'discord-akairo';
 import { Message } from 'discord.js';
 
-class runtimeCommand extends Command {
+export default class runtimeCommand extends Command {
 	constructor() {
 		super('runtime', {
 			aliases: ['uptime', 'runtime'],
@@ -21,5 +21,3 @@ class runtimeCommand extends Command {
 		}
 	}
 }
-
-module.exports = runtimeCommand;
