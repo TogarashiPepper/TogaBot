@@ -1,7 +1,7 @@
 import { Command } from 'discord-akairo';
 import { Message } from 'discord.js';
 
-export default class pingCommand extends Command {
+export default class PingCommand extends Command {
 	constructor() {
 		super('ping', {
 			aliases: ['ms', 'ping'],
