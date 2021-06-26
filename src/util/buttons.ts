@@ -21,4 +21,4 @@ const createButton = {
 	}
 }
 
-export { createButton };
+export default createButton;
