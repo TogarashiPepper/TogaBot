@@ -1,6 +1,6 @@
 import { Command } from 'discord-akairo';
 import { MessageButton, MessageActionRow, Message } from 'discord.js';
-import createButton from '../util/buttons.js';
+import createButton from '../util/buttons';
 
 export default class ButtonCommand extends Command {
 	constructor() {
