@@ -2,7 +2,7 @@ import { Command } from 'discord-akairo';
 import { Message, GuildMember } from 'discord.js';
 import ms from 'ms';
 
-export default class joinedCommand extends Command {
+export default class JoinedCommand extends Command {
 	constructor() {
 		super('joinedAt', {
 			aliases: ['joinedAt', 'getJoinDate'],

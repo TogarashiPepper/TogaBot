@@ -2,7 +2,7 @@ import { Command } from 'discord-akairo';
 import { Message, MessageEmbed } from 'discord.js';
 import TogaClient from '../util/TogaClient';
 
-export default class helpCommand extends Command {
+export default class HelpCommand extends Command {
 	constructor() {
 		super('help', {
 			aliases: ['commands', 'help'],
