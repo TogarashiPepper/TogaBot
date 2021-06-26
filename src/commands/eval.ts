@@ -3,7 +3,7 @@ import { MessageEmbed, MessageActionRow, MessageButton, MessageAttachment, Messa
 import { inspect } from 'util';
 import createButton from '../util/buttons';
 
-export default class evalCommand extends Command {
+export default class EvalCommand extends Command {
 	constructor() {
 		super('eval', {
 			aliases: ['ev', 'eval'],
