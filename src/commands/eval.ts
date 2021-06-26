@@ -1,7 +1,7 @@
 import { Command } from 'discord-akairo';
 import { MessageEmbed, MessageActionRow, MessageButton, MessageAttachment, Message } from 'discord.js';
 import { inspect } from 'util';
-import createButton from '../util/buttons';
+import { deleteButton } from '../util/buttons';
 
 export default class EvalCommand extends Command {
 	constructor() {
@@ -12,7 +12,7 @@ export default class EvalCommand extends Command {
 	}
 
 	async exec(message: Message) {
-		const delButton = createButton.del(message)
+		const delButton = deleteButton(message)
 		const row = new MessageActionRow().addComponents(delButton);
 		
 		try {
