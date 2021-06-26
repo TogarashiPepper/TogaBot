@@ -1,7 +1,7 @@
 import { Listener } from 'discord-akairo';
 import { MessageActionRow, MessageButton, Interaction, Message } from 'discord.js';
 
-export default class interactionListener extends Listener {
+export default class InteractionListener extends Listener {
 	constructor() {
 		super('interaction', {
 			emitter: 'client',
@@ -13,6 +13,7 @@ export default class interactionListener extends Listener {
 		if (interaction.isButton() && interaction.componentType == 'BUTTON') {
 			const authorID = interaction.customID.split('-');
 			console.log(authorID);
+			
 			if (authorID[1] === interaction.user.id) {
 				console.log(authorID);
 
@@ -38,16 +39,20 @@ export default class interactionListener extends Listener {
 						.setLabel('delete')
 						.setStyle('SECONDARY')
 				]);
+				
 				if (interaction.customID.startsWith('delete') && authorID[1] === interaction.user.id) {
 					(interaction.message as Message).delete();
 				}
+				
 				if (interaction.customID.startsWith('1')) {
 					interaction.update({ content: 'hello', components: [row] });
 				}
+				
 				else if (interaction.customID.startsWith('2')) {
 					interaction.update({ content: 'hello', components: [row2] });
 				}
 			}
+			
 			else {
 				interaction.reply({ content: 'you don\'t have permissions to use this button or its not registered as a button in my list', ephemeral: true });
 			}
