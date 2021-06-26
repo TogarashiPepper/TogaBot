@@ -1,24 +1,24 @@
 import { Message, MessageButton } from "discord.js";
 
-const createDelButton = (message: Message) => {
+const _createButton = (id: string, label: string, style: string) => {
 	return new MessageButton()
-		.setCustomID(`delete-${message.author.id}`)
-		.setLabel('delete')
-		.setStyle('SECONDARY');
+		.setCustomID(id)
+		.setLabel(label)
+		.setStyle(style)
 }
 
-const createOneButton = (message: Message) => {
-	return new MessageButton()
-		.setCustomID(`1-${message.author.id}`)
-		.setLabel('1')
-		.setStyle('PRIMARY');
+const createButton = {
+	del: function(message: Message) {
+		return _createButton(`del-${message.author.id}`, 'delete', 'SECONDARY');
+	},
+
+	one: function(message: Message) {
+		return _createButton(`1-${message.author.id}`, '1', 'PRIMARY');
+	},
+
+	two: function(message: Message) {
+		return _createButton(`2-${message.author.id}`, '2', 'DANGER');
+	}
 }
 
-const createTwoButton = (message: Message) => {
-	return new MessageButton()
-		.setCustomID(`2-${message.author.id}`)
-		.setLabel('2')
-		.setStyle('DANGER');
-}
-
-export { createDelButton, createOneButton, createTwoButton };
+export { createButton };
