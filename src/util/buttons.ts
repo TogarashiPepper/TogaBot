@@ -4,7 +4,7 @@ const _createButton = (id: string, label: string, style: string) => {
 	return new MessageButton()
 		.setCustomID(id)
 		.setLabel(label)
-		.setStyle(style)
+		.setStyle(style);
 }
 
 const createButton = {
