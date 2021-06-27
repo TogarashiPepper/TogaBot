@@ -1,7 +1,7 @@
 import { Command } from 'discord-akairo';
 import { Message } from 'discord.js';
 
-const getRandomInt(max: number) => `${Math.floor(Math.random() * Math.floor(max))}`;
+const getRandomInt = (max: number) => `${Math.floor(Math.random() * Math.floor(max))}`;
 
 const main = async (message: Message) => {
 	const args = message.content.split(/ +/);

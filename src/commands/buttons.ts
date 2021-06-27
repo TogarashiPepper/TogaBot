@@ -1,6 +1,6 @@
 import { Command } from 'discord-akairo';
 import { MessageButton, MessageActionRow, Message } from 'discord.js';
-import { deleteButton, oneButton } from '../util/buttons';
+import createButton from '../util/buttons';
 
 export default class ButtonCommand extends Command {
 	constructor() {
@@ -10,8 +10,8 @@ export default class ButtonCommand extends Command {
 	}
 
 	exec(message: Message) {
-		const oneButton = oneButton(message);
-		const delButton = deleteButton(message);
+		const oneButton = createButton(message, '1');
+		const delButton = createButton(message, 'delete');
 
 		const row = new MessageActionRow().addComponents(oneButton, delButton);
 		message.channel.send({ content: 'hello', components: [row] });
