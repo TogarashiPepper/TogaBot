@@ -52,12 +52,22 @@ export default class InteractionListener extends Listener {
 		}
 		else if(interaction.isCommand()){
 			if (interaction.commandName === 'buttons') {
-				const button = new MessageButton()
-				.setDisabled(interaction.options.get('disabled')!.value as boolean)
-				.setStyle(interaction.options.get('style')!.value as MessageButtonStyle)
-				.setLabel('button!')
-				.setCustomID('1234')
-				interaction.reply({ content: 'here\'s your custom button!', components: [[button]], ephemeral: true });
+				if(interaction.options.get('disabled')){
+					const button = new MessageButton()
+					.setDisabled(interaction.options.get('disabled')!.value as boolean)
+					.setStyle(interaction.options.get('style')!.value as MessageButtonStyle)
+					.setLabel('button!')
+					.setCustomID('1234')
+					interaction.reply({ content: 'here\'s your custom button!', components: [[button]], ephemeral: true });
+				}
+				else {
+					const button = new MessageButton()
+					.setDisabled(false)
+					.setStyle(interaction.options.get('style')!.value as MessageButtonStyle)
+					.setLabel('button!')
+					.setCustomID('1234')
+					interaction.reply({ content: 'here\'s your custom button!', components: [[button]], ephemeral: true });
+				}
 			}
 		}
 	}

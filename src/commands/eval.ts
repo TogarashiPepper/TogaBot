@@ -34,7 +34,7 @@ const data = {
 		name: 'disabled',
 		type: 'BOOLEAN',
 		description: 'set if the button is disabled or not',
-		required: true,
+		required: false,
 	}],
 };
 
