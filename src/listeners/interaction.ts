@@ -40,6 +40,9 @@ export default class InteractionListener extends Listener {
 				else if (interaction.customID.startsWith('2')) {
 					interaction.update({ content: 'hello', components: [row2] });
 				}
+				else if (interaction.customID.startsWith('1234')) {
+					interaction.deferUpdate();
+				}
 			}
 			
 			else {
