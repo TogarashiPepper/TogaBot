@@ -40,11 +40,12 @@ export default class InteractionListener extends Listener {
 				else if (interaction.customID.startsWith('2')) {
 					interaction.update({ content: 'hello', components: [row2] });
 				}
-				else if (interaction.customID.startsWith('1234')) {
-					interaction.deferUpdate();
-				}
 			}
 			
+			else if(interaction.customID.startsWith('1234')) {
+					interaction.deferUpdate();
+			}
+
 			else {
 				interaction.reply({ content: 'you don\'t have permissions to use this button or its not registered as a button in my list', ephemeral: true });
 			}
