@@ -1,5 +1,6 @@
 import { Listener } from 'discord-akairo';
-import { MessageActionRow, MessageButton, Interaction, Message } from 'discord.js';
+import { MessageActionRow, MessageButton, Interaction, Message, MessageButtonStyle } from 'discord.js';
+import createButton from '../util/buttons';
 
 export default class InteractionListener extends Listener {
 	constructor() {
@@ -19,25 +20,13 @@ export default class InteractionListener extends Listener {
 
 				const row = new MessageActionRow()
 					.addComponents([
-						new MessageButton()
-							.setCustomID(`2-${authorID[1]}`)
-							.setLabel('2')
-							.setStyle('DANGER'),
-						new MessageButton()
-							.setCustomID(`delete-${authorID[1]}`)
-							.setLabel('delete')
-							.setStyle('SECONDARY')
+						createButton(interaction.user.id, '2'),
+						createButton(interaction.user.id, 'delete')
 					]);
 
 				const row2 = new MessageActionRow().addComponents([
-					new MessageButton()
-						.setCustomID(`1-${authorID[1]}`)
-						.setLabel('1')
-						.setStyle('PRIMARY'),
-					new MessageButton()
-						.setCustomID(`delete-${authorID[1]}`)
-						.setLabel('delete')
-						.setStyle('SECONDARY')
+					createButton(interaction.user.id, '1'),
+					createButton(interaction.user.id, 'delete')
 				]);
 				
 				if (interaction.customID.startsWith('delete') && authorID[1] === interaction.user.id) {
@@ -55,6 +44,16 @@ export default class InteractionListener extends Listener {
 			
 			else {
 				interaction.reply({ content: 'you don\'t have permissions to use this button or its not registered as a button in my list', ephemeral: true });
+			}
+		}
+		else if(interaction.isCommand()){
+			if (interaction.commandName === 'buttons') {
+				const button = new MessageButton()
+				.setDisabled(interaction.options.get('disabled')!.value as boolean)
+				.setStyle(interaction.options.get('style')!.value as MessageButtonStyle)
+				.setLabel('button!')
+				.setCustomID('1234')
+				interaction.reply({ content: 'here\'s your custom button!', components: [[button]], ephemeral: true });
 			}
 		}
 	}

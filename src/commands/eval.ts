@@ -3,6 +3,41 @@ import { MessageEmbed, MessageActionRow, MessageButton, MessageAttachment, Messa
 import { inspect } from 'util';
 import createButton from '../util/buttons';
 
+const data = {
+	name: 'buttons',
+	description: 'contructs buttons based on given input',
+	options: [{
+		name: 'style',
+		type: 'STRING',
+		description: 'the style to be used for the button',
+		required: true,
+		choices: [
+			{
+				name: 'Red',
+				value: 'DANGER',
+			},
+			{
+				name: 'Blurple',
+				value: 'PRIMARY',
+			},
+			{
+				name: 'Green',
+				value: 'SUCCESS',
+			},
+			{
+				name: 'Grey',
+				value: 'SECONDARY',
+			},
+		],
+	},
+	{
+		name: 'disabled',
+		type: 'BOOLEAN',
+		description: 'set if the button is disabled or not',
+		required: true,
+	}],
+};
+
 export default class EvalCommand extends Command {
 	constructor() {
 		super('eval', {
@@ -12,7 +47,7 @@ export default class EvalCommand extends Command {
 	}
 
 	async exec(message: Message) {
-		const delButton = createButton(message, 'delete');
+		const delButton = createButton(message.author.id, 'delete');
 		const row = new MessageActionRow().addComponents(delButton);
 		
 		try {

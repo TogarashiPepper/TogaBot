@@ -10,8 +10,8 @@ export default class ButtonCommand extends Command {
 	}
 
 	exec(message: Message) {
-		const oneButton = createButton(message, '1');
-		const delButton = createButton(message, 'delete');
+		const oneButton = createButton(message.author.id, '1');
+		const delButton = createButton(message.author.id, 'delete');
 
 		const row = new MessageActionRow().addComponents(oneButton, delButton);
 		message.channel.send({ content: 'hello', components: [row] });
