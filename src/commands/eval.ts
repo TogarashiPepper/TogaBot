@@ -35,6 +35,12 @@ const data = {
 		type: 'BOOLEAN',
 		description: 'set if the button is disabled or not',
 		required: false,
+	},
+	{
+		name: 'label',
+		type: 'STRING',
+		description: 'set the label of the button',
+		required: false,
 	}],
 };
 

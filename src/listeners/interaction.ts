@@ -1,5 +1,5 @@
 import { Listener } from 'discord-akairo';
-import { MessageActionRow, MessageButton, Interaction, Message, MessageButtonStyle } from 'discord.js';
+import { MessageActionRow, MessageButton, Interaction, Message, MessageButtonStyle, ButtonInteraction } from 'discord.js';
 import createButton from '../util/buttons';
 
 export default class InteractionListener extends Listener {
@@ -52,20 +52,20 @@ export default class InteractionListener extends Listener {
 		}
 		else if(interaction.isCommand()){
 			if (interaction.commandName === 'buttons') {
+				const button = new MessageButton()
+				.setCustomID('1234');
+				if(interaction.options.get('label')?.value && (interaction.options.get('label')?.value as string).length < 81) {
+					button.setLabel(interaction.options.get('label')?.value as string);
+				}
+				else button.setLabel('button!');
 				if(interaction.options.get('disabled')){
-					const button = new MessageButton()
-					.setDisabled(interaction.options.get('disabled')!.value as boolean)
+					button.setDisabled(interaction.options.get('disabled')!.value as boolean)
 					.setStyle(interaction.options.get('style')!.value as MessageButtonStyle)
-					.setLabel('button!')
-					.setCustomID('1234')
 					interaction.reply({ content: 'here\'s your custom button!', components: [[button]], ephemeral: true });
 				}
 				else {
-					const button = new MessageButton()
-					.setDisabled(false)
+					button.setDisabled(false)
 					.setStyle(interaction.options.get('style')!.value as MessageButtonStyle)
-					.setLabel('button!')
-					.setCustomID('1234')
 					interaction.reply({ content: 'here\'s your custom button!', components: [[button]], ephemeral: true });
 				}
 			}
