@@ -1,6 +1,15 @@
 import { Listener } from 'discord-akairo';
-import { MessageActionRow, MessageButton, Interaction, Message, MessageButtonStyle, ButtonInteraction } from 'discord.js';
+import { readdirSync } from 'fs';
+import { MessageActionRow, MessageButton, Interaction, Message, MessageButtonStyle, Collection } from 'discord.js';
 import createButton from '../util/buttons';
+type ExecuteFunction = (interaction: Interaction) => void;
+
+const buttons = new Collection();
+const buttonFiles = readdirSync(__dirname + '/../buttons').filter(file => file.endsWith('.js'));
+for (const file of buttonFiles) {
+	const button = require(`${__dirname}/../buttons/${file}`);
+	buttons.set(button.customID, button);
+}
 
 export default class InteractionListener extends Listener {
 	constructor() {
@@ -13,6 +22,9 @@ export default class InteractionListener extends Listener {
 	exec(interaction: Interaction) {
 		if (interaction.isButton() && interaction.componentType == 'BUTTON') {
 			const authorID = interaction.customID.split('-');
+			console.log(authorID[0], buttons);
+			if (!buttons.has(authorID[0])) return;
+			(buttons.get(authorID[0]) as { customID: string, execute: ExecuteFunction} ).execute(interaction);
 			console.log(authorID);
 			
 			if (authorID[1] === interaction.user.id) {
@@ -28,18 +40,6 @@ export default class InteractionListener extends Listener {
 					createButton(interaction.user.id, '1'),
 					createButton(interaction.user.id, 'delete')
 				]);
-				
-				if (interaction.customID.startsWith('delete') && authorID[1] === interaction.user.id) {
-					(interaction.message as Message).delete();
-				}
-				
-				if (interaction.customID.startsWith('1')) {
-					interaction.update({ content: 'hello', components: [row] });
-				}
-				
-				else if (interaction.customID.startsWith('2')) {
-					interaction.update({ content: 'hello', components: [row2] });
-				}
 			}
 			
 			else if(interaction.customID.startsWith('1234')) {
