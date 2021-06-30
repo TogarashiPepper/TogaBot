@@ -1,61 +1,20 @@
-import { Command } from 'discord-akairo';
-import { MessageEmbed, MessageActionRow, MessageButton, MessageAttachment, Message } from 'discord.js';
-import { inspect } from 'util';
-import createButton from '../util/buttons';
+import { Message, MessageAttachment, MessageActionRow, MessageEmbed } from "discord.js";
+import { Command, PieceContext } from '@sapphire/framework';
+import { inspect } from "util";
+import createButton from '../../util/buttons';
 
-const data = {
-	name: 'buttons',
-	description: 'contructs buttons based on given input',
-	options: [{
-		name: 'style',
-		type: 'STRING',
-		description: 'the style to be used for the button',
-		required: true,
-		choices: [
-			{
-				name: 'Red',
-				value: 'DANGER',
-			},
-			{
-				name: 'Blurple',
-				value: 'PRIMARY',
-			},
-			{
-				name: 'Green',
-				value: 'SUCCESS',
-			},
-			{
-				name: 'Grey',
-				value: 'SECONDARY',
-			},
-		],
-	},
-	{
-		name: 'disabled',
-		type: 'BOOLEAN',
-		description: 'set if the button is disabled or not',
-		required: false,
-	},
-	{
-		name: 'label',
-		type: 'STRING',
-		description: 'set the label of the button',
-		required: false,
-	}],
-};
-
-export default class EvalCommand extends Command {
-	constructor() {
-		super('eval', {
-			aliases: ['ev', 'eval'],
-			ownerOnly: true,
+export default class extends Command {
+	constructor(context: PieceContext) {
+		super(context, {
+			name: 'eval',
+			description: 'evaluate code'
 		});
 	}
 
-	async exec(message: Message) {
+	async run(message: Message) {
 		const delButton = createButton(message.author.id, 'delete');
 		const row = new MessageActionRow().addComponents(delButton);
-		
+
 		try {
 			// eslint-disable-next-line no-var
 			const result = message.content.split(' ').slice(1).join(' ');
@@ -86,4 +45,4 @@ export default class EvalCommand extends Command {
 
 		}
 	}
-}
+};

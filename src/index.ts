@@ -1,5 +1,8 @@
+import { SapphireClient } from '@sapphire/framework';
 import { token } from './config.json';
-import TogaClient from './util/TogaClient';
+const client = new SapphireClient({
+	defaultPrefix: '!',
+	intents: ['GUILDS', 'GUILD_MESSAGES']
+});
 
-const client = new TogaClient();
 client.login(token);
