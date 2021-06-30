@@ -1,7 +1,7 @@
 import { ButtonInteraction, MessageActionRow } from "discord.js";
 import createButton from '../util/buttons'
 
-const button = { customID: '1', execute: (interaction: ButtonInteraction) => {
+const button1 = { customID: '1', execute: (interaction: ButtonInteraction) => {
 	const row = new MessageActionRow()
 	.addComponents([
 		createButton(interaction.user.id, '2'),
@@ -11,4 +11,4 @@ const button = { customID: '1', execute: (interaction: ButtonInteraction) => {
 	interaction.update({ content: 'hello', components: [row] });
 }}
 
-export = button;
+export = button1;

@@ -22,32 +22,14 @@ export default class InteractionListener extends Listener {
 	exec(interaction: Interaction) {
 		if (interaction.isButton() && interaction.componentType == 'BUTTON') {
 			const authorID = interaction.customID.split('-');
-			console.log(authorID[0], buttons);
-			if (!buttons.has(authorID[0])) return;
-			(buttons.get(authorID[0]) as { customID: string, execute: ExecuteFunction} ).execute(interaction);
-			console.log(authorID);
-			
 			if (authorID[1] === interaction.user.id) {
+				console.log(authorID[0], buttons);
+				if (!buttons.has(authorID[0])) return;
+				(buttons.get(authorID[0]) as { customID: string, execute: ExecuteFunction} ).execute(interaction);
 				console.log(authorID);
-
-				const row = new MessageActionRow()
-					.addComponents([
-						createButton(interaction.user.id, '2'),
-						createButton(interaction.user.id, 'delete')
-					]);
-
-				const row2 = new MessageActionRow().addComponents([
-					createButton(interaction.user.id, '1'),
-					createButton(interaction.user.id, 'delete')
-				]);
 			}
-			
-			else if(interaction.customID.startsWith('1234')) {
-					interaction.deferUpdate();
-			}
-
 			else {
-				interaction.reply({ content: 'you don\'t have permissions to use this button or its not registered as a button in my list', ephemeral: true });
+				interaction.deferUpdate();
 			}
 		}
 		else if(interaction.isCommand()){
