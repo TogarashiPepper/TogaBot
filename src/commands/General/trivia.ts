@@ -29,21 +29,22 @@ export default class extends Command {
 		const arrOfAnswers = response.results[0].incorrect_answers;
 		arrOfAnswers.push(response.results[0].correct_answer);
 		
-		const embed = new MessageEmbed()
-		.setTitle('trivia')
-		.setDescription(`question: ${response.results[0].question}`);
-
 		const first = arrOfAnswers.shift() || 'answer not found';
 		const second = arrOfAnswers.shift() || 'answer not found';
 		const third = arrOfAnswers.shift() || 'answer not found';
 		const fourth = arrOfAnswers.shift() || 'answer not found';
 
+		const embed = new MessageEmbed()
+		.setTitle('trivia')
+		.setDescription(`question: ${response.results[0].question}\n1:${first}\n2:${second}\n3:${third}\n4:${fourth}`);
+
+
 		const select = new MessageSelectMenu().setCustomID('trivia')
 		.addOptions([
-		{ label: first, value: first },
-		{ label: second, value: second },
-		{ label: third, value: third },
-		{ label: fourth, value: fourth }
+		{ label: '1', value: first },
+		{ label: '2', value: second },
+		{ label: '3', value: third },
+		{ label: '4', value: fourth }
 		]);
 		const row = new MessageActionRow().addComponents([select]);
 		const reply = await message.reply({ embeds: [embed], components: [row] })
