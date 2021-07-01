@@ -4,8 +4,8 @@ import { Args, Command, PieceContext } from '@sapphire/framework';
 export default class extends Command {
 	constructor(context: PieceContext) {
 		super(context, {
-			name: 'echo',
-			description: 'Echo your input back to you'
+			name: 'avatar',
+			description: 'get someone\'s avatar'
 		});
 	}
 

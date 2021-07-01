@@ -5,8 +5,8 @@ import fetch from "node-fetch";
 export default class extends Command {
 	constructor(context: PieceContext) {
 		super(context, {
-			name: 'echo',
-			description: 'Echo your input back to you'
+			name: 'xkcd',
+			description: 'search xkcd'
 		});
 	}
 
