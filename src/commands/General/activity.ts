@@ -22,12 +22,12 @@ export default class extends Command {
 			{ label:'Youtube Together', value: '755600276941176913' },
 			{ label: 'Fishington', value: '814288819477020702' },
 			{ label: 'betrayal', value: '773336526917861400' }
-			])
+			]);
 			const row = new MessageActionRow().addComponents([select]);
 
 			const reply = await message.reply({ content: 'select an activity start', components: [row] })
 			const filter = (i: MessageComponentInteraction) => { return i.isSelectMenu() };
-			const collector = message.channel.createMessageComponentInteractionCollector({ filter: filter, time: 15000 });
+			const collector = message.channel.createMessageComponentInteractionCollector({ filter: filter, time: 60000 });
 
 			collector.on('collect', (interaction: MessageComponentInteraction) => {
 				if(interaction.isSelectMenu()){
