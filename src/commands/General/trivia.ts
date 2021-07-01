@@ -39,15 +39,15 @@ export default class extends Command {
 
 		const embed = new MessageEmbed()
 		.setTitle('trivia')
-		.setDescription(`question: ${decode(response.results[0].question)}`);
+		.setDescription(`question: ${decode(response.results[0].question)}\n1:${first}\n2:${second}\n3:${third}\n4:${fourth}`);
 
 
 		const select = new MessageSelectMenu().setCustomID(message.id)
 		.addOptions([
-		{ label: '1', value: first, description: first },
-		{ label: '2', value: second, description: second },
-		{ label: '3', value: third, description: third },
-		{ label: '4', value: fourth, description: fourth }
+		{ label: '1', value: first },
+		{ label: '2', value: second },
+		{ label: '3', value: third },
+		{ label: '4', value: fourth }
 		]);
 		const row = new MessageActionRow().addComponents([select]);
 		const reply = await message.reply({ embeds: [embed], components: [row] })
