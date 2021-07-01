@@ -1,6 +1,8 @@
 import { Message, MessageEmbed, MessageSelectMenu, MessageActionRow, MessageComponentInteraction, Collection } from "discord.js";
-import { Command, PieceContext } from '@sapphire/framework';
+import { Command, Identifiers, PieceContext } from '@sapphire/framework';
 import triviaFetch from '../../util/triviaFetch'
+import arrayShuffle from '../../util/arrayShuffle';
+import { decode } from 'he';
 
 interface response {
 	response_code: 0,
@@ -28,18 +30,19 @@ export default class extends Command {
 		const response: response = await triviaFetch('https://opentdb.com/api.php?amount=1');
 		const arrOfAnswers = response.results[0].incorrect_answers;
 		arrOfAnswers.push(response.results[0].correct_answer);
-		
-		const first = arrOfAnswers.shift() || 'answer not found';
-		const second = arrOfAnswers.shift() || 'answer not found';
-		const third = arrOfAnswers.shift() || 'answer not found';
-		const fourth = arrOfAnswers.shift() || 'answer not found';
+		arrayShuffle(arrOfAnswers);
+
+		const first = decode(arrOfAnswers.shift() as string) || '1: answer not found';
+		const second = decode(arrOfAnswers.shift() as string) || '2: answer not found';
+		const third = decode(arrOfAnswers.shift() as string) || '3: answer not found';
+		const fourth = decode(arrOfAnswers.shift() as string) || '4: answer not found';
 
 		const embed = new MessageEmbed()
 		.setTitle('trivia')
-		.setDescription(`question: ${response.results[0].question}\n1:${first}\n2:${second}\n3:${third}\n4:${fourth}`);
+		.setDescription(`question: ${decode(response.results[0].question)}\n1:${first}\n2:${second}\n3:${third}\n4:${fourth}`);
 
 
-		const select = new MessageSelectMenu().setCustomID('trivia')
+		const select = new MessageSelectMenu().setCustomID(message.id)
 		.addOptions([
 		{ label: '1', value: first },
 		{ label: '2', value: second },
@@ -49,22 +52,21 @@ export default class extends Command {
 		const row = new MessageActionRow().addComponents([select]);
 		const reply = await message.reply({ embeds: [embed], components: [row] })
 
-		const filter = (i: MessageComponentInteraction) => { return i.isSelectMenu() };
-		const collector = message.channel.createMessageComponentInteractionCollector({ filter: filter, time: 60000, max: 1 });
+		const filter = (i: MessageComponentInteraction) => { return i.isSelectMenu() && i.customID === message.id };
+		const collector = message.channel.createMessageComponentInteractionCollector({ filter: filter, time: 60000 });
 
-		collector.on('collect', (interaction: MessageComponentInteraction) => {
+		collector.on('collect', async (interaction: MessageComponentInteraction) => {
 			if(interaction?.isSelectMenu()){
 				if(interaction.values?.join('') === response.results[0].correct_answer) {
-					interaction.update({ embeds: [], content:'you win!', components: [] })
+					await interaction.update({ embeds: [], content:'you win!', components: [] })
+					collector.stop();
 				}
 				else {
-					interaction.update({ embeds: [], content:'you lose', components: [] })
+					await interaction.update({ embeds: [], content:'you lose', components: [] })
+					collector.stop();
 				}
 			}
 		});
-		collector.on('end', () => {
-			reply.edit({ content: 'this game timed out', embeds: [], components: [] })
-		})
 
 	}
 };
