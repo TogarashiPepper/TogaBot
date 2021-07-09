@@ -42,7 +42,7 @@ export default class extends Command {
 		.setDescription(`question: ${decode(response.results[0].question)}\n1:${first}\n2:${second}\n3:${third}\n4:${fourth}`);
 
 
-		const select = new MessageSelectMenu().setCustomID(message.id)
+		const select = new MessageSelectMenu().setCustomId(message.id)
 		.addOptions([
 		{ label: '1', value: first },
 		{ label: '2', value: second },
@@ -52,8 +52,8 @@ export default class extends Command {
 		const row = new MessageActionRow().addComponents([select]);
 		const reply = await message.reply({ embeds: [embed], components: [row] })
 
-		const filter = (i: MessageComponentInteraction) => { return i.isSelectMenu() && i.customID === message.id };
-		const collector = message.channel.createMessageComponentInteractionCollector({ filter: filter, time: 60000 });
+		const filter = (i: MessageComponentInteraction) => { return i.isSelectMenu() && i.customId === message.id };
+		const collector = message.channel.createMessageComponentCollector({ filter: filter, time: 60000 });
 
 		collector.on('collect', async (interaction: MessageComponentInteraction) => {
 			if(interaction?.isSelectMenu()){
