@@ -15,9 +15,9 @@ export default class extends Command {
 	async run(message: Message) {
 		if(message.guild?.me) {
 			const member = message.guild.me;
-			const channel = message.guild.channels.cache.find(c => c.type === 'voice' && c.permissionsFor(member).has('CREATE_INSTANT_INVITE'));
+			const channel = message.guild.channels.cache.find(c => c.type === 'GUILD_VOICE' && c.permissionsFor(member).has('CREATE_INSTANT_INVITE'));
 			
-			const select = new MessageSelectMenu().setCustomID('select').setPlaceholder('select something!')
+			const select = new MessageSelectMenu().setCustomId('select').setPlaceholder('select something!')
 			.addOptions([
 			{ label:'Youtube Together', value: '755600276941176913' },
 			{ label: 'Fishington', value: '814288819477020702' },
@@ -27,7 +27,7 @@ export default class extends Command {
 
 			const reply = await message.reply({ content: 'select an activity start', components: [row] })
 			const filter = (i: MessageComponentInteraction) => { return i.isSelectMenu() };
-			const collector = message.channel.createMessageComponentInteractionCollector({ filter: filter, time: 60000 });
+			const collector = message.channel.createMessageComponentCollector({ filter: filter, time: 60000 });
 
 			collector.on('collect', (interaction: MessageComponentInteraction) => {
 				if(interaction.isSelectMenu()){
