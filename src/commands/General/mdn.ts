@@ -15,7 +15,7 @@ export default class extends Command {
 		const getmdn = async () => {
 			const fetched = await fetch(`https://developer.mozilla.org/api/v1/search?q=${search}`);
 			const data = await fetched.json();
-			const embed = await new MessageEmbed().setTitle(data.documents[0].title).setDescription(data.documents[0].summary);
+			const embed = await new MessageEmbed().setTitle(data.documents[0].title).setDescription(data.documents[0].summary.replace(/\n/g, ''));
 			message.channel.send({ embeds: [embed] });
 		}
 
