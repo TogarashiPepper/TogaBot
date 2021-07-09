@@ -44,7 +44,7 @@ export default class extends Command {
 				message.reply({ embeds: [resultEmbed] })	
 			}
 			else{
-				message.reply("your code produced errors or output")
+				message.reply(`\`\`\`${inspect(fetched)}\`\`\``)
 			}
 
 		} else {
