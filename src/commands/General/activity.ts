@@ -33,7 +33,7 @@ export default class extends Command {
 				if(interaction.isSelectMenu()){
 					activity(message, interaction.values?.join('') as Snowflake)
 					.then((res) => res.json()).then((i: APIInvite) => interaction.update({ content: `https://discord.gg/${i.code}`, components: [] }));
-				}	
+				}
 			});
 		}
 	}
