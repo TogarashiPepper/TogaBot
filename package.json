@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@sapphire/framework": "^1.0.2",
+    "@sapphire/framework": "^2.0.0-next.8cf1c2b6.0",
     "@types/ms": "^0.7.31",
     "@types/node-fetch": "^2.5.10",
     "discord-akairo": "^8.1.0",

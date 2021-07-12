@@ -5,7 +5,9 @@ export default class extends Command {
 	constructor(context: PieceContext) {
 		super(context, {
 			name: 'avatar',
-			description: 'get someone\'s avatar'
+            description: 'get someone\'s avatar',
+            aliases: ['avatar', 'av', 'pfp'],
+			cooldownDuration: 10000,
 		});
 	}
 

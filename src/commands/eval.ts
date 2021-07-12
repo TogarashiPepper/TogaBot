@@ -1,13 +1,14 @@
 import { Message, MessageAttachment, MessageActionRow, MessageEmbed } from "discord.js";
 import { Command, PieceContext } from '@sapphire/framework';
 import { inspect } from "util";
-import createButton from '../../util/buttons';
+import createButton from '../util/buttons';
 
 export default class extends Command {
 	constructor(context: PieceContext) {
 		super(context, {
 			name: 'eval',
-			description: 'evaluate code'
+			description: 'evaluate code',
+			aliases: ['ev', 'eval']
 		});
 	}
 

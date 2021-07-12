@@ -1,12 +1,13 @@
 import { Command, PieceContext } from '@sapphire/framework';
 import { MessageActionRow, Message } from 'discord.js';
-import createButton from '../../util/buttons';
+import createButton from '../util/buttons';
 
 export default class extends Command {
 	constructor(context: PieceContext) {
 		super(context, {
 			name: 'buttons',
-			description: 'make some buttons!'
+			description: 'make some buttons!',
+			aliases: ['button', 'buttons']
 		});
 	}
 

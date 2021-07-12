@@ -1,7 +1,7 @@
 import { Message, MessageActionRow, MessageComponentInteraction, MessageSelectMenu, Snowflake } from "discord.js";
 import { Command, PieceContext } from '@sapphire/framework';
 import { APIInvite } from 'discord-api-types/v8';
-import activity from "../../util/activityFetch";
+import activity from "../util/activityFetch";
 
 export default class extends Command {
 	constructor(context: PieceContext) {

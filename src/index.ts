@@ -19,12 +19,12 @@ client.on('interactionCreate', (interaction: Interaction) => {
 			if(interaction.options.get('disabled')){
 				button.setDisabled(interaction.options.get('disabled')!.value as boolean)
 				.setStyle(interaction.options.get('style')!.value as MessageButtonStyle)
-				interaction.reply({ content: 'here\'s your custom button!', components: [[button]], ephemeral: true });
+				interaction.reply({ content: 'here\'s your custom button!', components:  [{ type: 'ACTION_ROW', components: [button] }], ephemeral: true });
 			}
 			else {
 				button.setDisabled(false)
 				.setStyle(interaction.options.get('style')!.value as MessageButtonStyle)
-				interaction.reply({ content: 'here\'s your custom button!', components: [[button]], ephemeral: true });
+				interaction.reply({ content: 'here\'s your custom button!', components:  [{ type: 'ACTION_ROW', components: [button] }], ephemeral: true });
 			}
 		}
 	}

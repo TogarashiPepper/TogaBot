@@ -1,7 +1,7 @@
 import { Message, MessageEmbed, MessageSelectMenu, MessageActionRow, MessageComponentInteraction, Collection } from "discord.js";
 import { Command, Identifiers, PieceContext } from '@sapphire/framework';
-import triviaFetch from '../../util/triviaFetch'
-import arrayShuffle from '../../util/arrayShuffle';
+import triviaFetch from '../util/triviaFetch'
+import arrayShuffle from '../util/arrayShuffle';
 import { decode } from 'he';
 
 interface response {
