@@ -21,7 +21,7 @@ export default class extends Command {
 	}
 
 	async run(message: Message) {
-		const args = message.content.slice('?'.length).replace(/\n/g, ' ').split(/ +/)
+		const args = message.content.slice(1).replace(/\n/g, ' ').split(/ +/)
 		args.shift();
 		const lang = args.shift()?.slice(3);
 		const code = message.content.match(/```[a-zA-Z+]*\n([\s\S]*?)```/);
@@ -36,12 +36,24 @@ export default class extends Command {
 			if(fetched.stderr) {
 				resultEmbed.setTitle('oops, there was an error')
 				.setDescription(`\`\`\`${fetched.stderr}\`\`\``);
-				message.reply({ embeds: [resultEmbed] })
+				if(fetched.stderr.length > 4000){
+					const file = new MessageAttachment(Buffer.from(`${fetched.stderr}`), 'piston.txt');
+					await message.reply({ content: 'output was too long to fit into an embed to it has been converted to a file', files: [file] })
+				}
+				else{
+					await message.reply({ embeds: [resultEmbed] })
+				}
 			}
 			else if(fetched.stdout){
 				resultEmbed.setTitle(`successfully ran ${fetched.language}`)
 				.setDescription(`\`\`\`${lang}\n${fetched.stdout}\`\`\``);
-				message.reply({ embeds: [resultEmbed] })	
+				if(fetched.stdout.length > 4000){
+					const file = new MessageAttachment(Buffer.from(`${fetched.stdout}`), 'piston.txt');
+					await message.reply({ content: 'output was too long to fit into an embed to it has been converted to a file', files: [file] })
+				}
+				else{
+					await message.reply({ embeds: [resultEmbed] })	
+				}
 			}
 			else{
 				message.reply(`\`\`\`${inspect(fetched)}\`\`\``)

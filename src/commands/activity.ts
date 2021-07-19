@@ -1,4 +1,4 @@
-import { Message, MessageActionRow, MessageComponentInteraction, MessageSelectMenu, Snowflake } from "discord.js";
+import { GuildChannel, Message, MessageActionRow, MessageComponentInteraction, MessageSelectMenu, Snowflake, VoiceChannel } from "discord.js";
 import { Command, PieceContext } from '@sapphire/framework';
 import { APIInvite } from 'discord-api-types/v8';
 import activity from "../util/activityFetch";
@@ -26,13 +26,15 @@ export default class extends Command {
 			const row = new MessageActionRow().addComponents([select]);
 
 			const reply = await message.reply({ content: 'select an activity start', components: [row] })
-			const filter = (i: MessageComponentInteraction) => { return i.isSelectMenu() };
+			const filter = (i: MessageComponentInteraction) => { return i.isSelectMenu() && i.message.id === reply.id};
 			const collector = message.channel.createMessageComponentCollector({ filter: filter, time: 60000 });
 
 			collector.on('collect', (interaction: MessageComponentInteraction) => {
 				if(interaction.isSelectMenu()){
-					activity(message, interaction.values?.join('') as Snowflake)
-					.then((res) => res.json()).then((i: APIInvite) => interaction.update({ content: `https://discord.gg/${i.code}`, components: [] }));
+					if(channel?.type === "GUILD_VOICE") {
+						activity(channel, interaction.values?.join('') as Snowflake)
+						.then((res) => res.json()).then((i: APIInvite) => interaction.update({ content: `https://discord.gg/${i.code}`, components: [] }));
+					}
 				}
 			});
 		}

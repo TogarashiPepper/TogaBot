@@ -7,7 +7,6 @@ export default class extends Command {
 			name: 'avatar',
             description: 'get someone\'s avatar',
             aliases: ['avatar', 'av', 'pfp'],
-			cooldownDuration: 10000,
 		});
 	}
 

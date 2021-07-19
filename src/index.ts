@@ -5,6 +5,9 @@ const client = new SapphireClient({
 	defaultPrefix: '?',
 	intents: ['GUILDS', 'GUILD_MESSAGES'],
 	caseInsensitiveCommands: true,
+	ws: { 
+		properties: { $browser: 'Discord iOS' } 
+	}
 });
 
 client.on('interactionCreate', (interaction: Interaction) => {

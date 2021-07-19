@@ -11,7 +11,7 @@ export default class extends Command {
 	}
 
 	async run(message: Message) {
-		const commandMap = this.container.stores.get('commands');
+		const commandMap = this.context.stores.get('commands');
 		const commands: string[] = [];
 		commandMap.forEach(command => commands.push(`**${command.name}**\n${command.description}\n`));
 		const embed = new MessageEmbed().setDescription(commands.join(''));

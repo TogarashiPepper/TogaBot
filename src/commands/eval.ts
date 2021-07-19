@@ -1,5 +1,5 @@
 import { Message, MessageAttachment, MessageActionRow, MessageEmbed } from "discord.js";
-import { Command, PieceContext } from '@sapphire/framework';
+import { Args, Command, PieceContext } from '@sapphire/framework';
 import { inspect } from "util";
 import createButton from '../util/buttons';
 
@@ -8,21 +8,28 @@ export default class extends Command {
 		super(context, {
 			name: 'eval',
 			description: 'evaluate code',
-			aliases: ['ev', 'eval']
+			aliases: ['ev', 'eval'],
+			strategyOptions: { flags: ['async'] }
 		});
 	}
 
-	async run(message: Message) {
+	async run(message: Message, args: Args) {
 		if(message.author.id === '779403924850343947') {
 			const delButton = createButton(message.author.id, 'delete');
 			const row = new MessageActionRow().addComponents(delButton);
 
 			try {
-				const result = message.content.split(' ').slice(1).join(' ');
+				let result;
+				result = args.getFlags('async') ? message.content.split(' ').slice(2).join(' ') : message.content.split(' ').slice(1).join(' ')
 				// if(message.content.match(flagregex)) {
 				// message.flags.push(message.content.match(flagregex)[0]);
-				
-				let evaled = await eval('(async () => {' + result + '})()');
+				let evaled;
+				if(args.getFlags('async')){
+					evaled = await eval('(async () => {' + result + '})()');
+				}
+				else {
+					evaled = await eval(result);
+				}
 				if (typeof evaled != 'string') evaled = inspect(evaled, { depth: 0 });
 				
 				if (`\`\`\`js\n${evaled}\`\`\``.length < 2000) {
@@ -35,7 +42,6 @@ export default class extends Command {
 				// }
 			}
 			catch (err) {
-				// eslint-disable-next-line no-shadow
 				const result = message.content.split(' ').slice(1).join(' ');
 				const embed = new MessageEmbed()
 					.setTitle('there was an error')
