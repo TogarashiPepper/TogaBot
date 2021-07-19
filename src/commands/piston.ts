@@ -1,5 +1,6 @@
 import { Message, MessageAttachment, MessageEmbed } from "discord.js";
 import { Command, PieceContext } from '@sapphire/framework';
+import { Stopwatch } from '@sapphire/stopwatch';
 import { inspect } from "util";
 import fetch from "node-fetch";
 const api = "https://emkc.org/api/v1/piston/execute";
@@ -16,7 +17,8 @@ export default class extends Command {
 	constructor(context: PieceContext) {
 		super(context, {
 			name: 'piston',
-			description: 'evaluate code in other langs'
+			description: 'evaluate code in other langs',
+			aliases: ['p', 'ps', 'piston'],
 		});
 	}
 
@@ -31,7 +33,9 @@ export default class extends Command {
 				"language": lang,
 				"source": code[1],
 			}
+			const stopwatch = new Stopwatch();
 			const fetched: Fetched = await (await fetch(api, { method: 'post', body:JSON.stringify(body), headers: { 'Content-Type': 'application/json' }})).json();
+			const timed = stopwatch.stop().toString();
 			const resultEmbed = new MessageEmbed();
 			if(fetched.stderr) {
 				resultEmbed.setTitle('oops, there was an error')
@@ -46,7 +50,8 @@ export default class extends Command {
 			}
 			else if(fetched.stdout){
 				resultEmbed.setTitle(`successfully ran ${fetched.language}`)
-				.setDescription(`\`\`\`${lang}\n${fetched.stdout}\`\`\``);
+				.setDescription(`\`\`\`${lang}\n${fetched.stdout}\`\`\``)
+				.setFooter(`Time taken: ${timed}`);
 				if(fetched.stdout.length > 4000){
 					const file = new MessageAttachment(Buffer.from(`${fetched.stdout}`), 'piston.txt');
 					await message.reply({ content: 'output was too long to fit into an embed to it has been converted to a file', files: [file] })

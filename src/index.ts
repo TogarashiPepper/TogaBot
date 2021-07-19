@@ -4,11 +4,29 @@ import { token } from './config.json';
 const client = new SapphireClient({
 	defaultPrefix: '?',
 	intents: ['GUILDS', 'GUILD_MESSAGES'],
+	partials: ['MESSAGE', 'CHANNEL'],
 	caseInsensitiveCommands: true,
 	ws: { 
 		properties: { $browser: 'Discord iOS' } 
 	}
 });
+
+client.on('messageUpdate', async (oldMessage, newMessage) => {
+	console.log(oldMessage, newMessage)
+	if(newMessage.partial || oldMessage.partial) {
+		await newMessage.fetch();
+		await oldMessage.fetch();
+
+		if(oldMessage.content === newMessage.content) return;
+		
+		if(!newMessage.partial) {
+			client.emit('message', newMessage);
+		}
+	}
+	else {
+		client.emit('message', newMessage);	
+	}
+})
 
 client.on('interactionCreate', (interaction: Interaction) => {
 	if(interaction.isCommand()){
