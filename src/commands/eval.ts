@@ -1,6 +1,6 @@
-import { Message, MessageAttachment, MessageActionRow, MessageEmbed } from "discord.js";
+import { Message, MessageAttachment, MessageActionRow, MessageEmbed } from 'discord.js';
 import { Args, Command, PieceContext } from '@sapphire/framework';
-import { inspect } from "util";
+import { inspect } from 'util';
 import createButton from '../util/buttons';
 
 export default class extends Command {
@@ -9,11 +9,11 @@ export default class extends Command {
 			name: 'eval',
 			description: 'evaluate code',
 			aliases: ['ev', 'eval'],
-			strategyOptions: { flags: ['async'] }
+			strategyOptions: { flags: ['async'] },
 		});
 	}
 
-	async run(message: Message, args: Args) {
+	async run(message: Message, args: Args): Promise<void> {
 		if(message.author.id === '779403924850343947') {
 			const delButton = createButton(message.author.id, 'delete');
 			const row = new MessageActionRow().addComponents(delButton);
@@ -24,14 +24,14 @@ export default class extends Command {
 				// if(message.content.match(flagregex)) {
 				// message.flags.push(message.content.match(flagregex)[0]);
 				let evaled;
-				if(args.getFlags('async')){
+				if(args.getFlags('async')) {
 					evaled = await eval('(async () => {' + result + '})()');
 				}
 				else {
 					evaled = await eval(result);
 				}
 				if (typeof evaled != 'string') evaled = inspect(evaled, { depth: 0 });
-				
+
 				if (`\`\`\`js\n${evaled}\`\`\``.length < 2000) {
 					message.channel.send({ content: `\`\`\`js\n${evaled}\`\`\``, components: [row] });
 				}
@@ -51,6 +51,6 @@ export default class extends Command {
 				console.log(err);
 
 			}
-		}	
+		}
 	}
-};
+}

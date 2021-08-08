@@ -3,3 +3,5 @@ package-lock.json
 config.json
 *.env
 build
+.DS_Store
+.vimspector.json

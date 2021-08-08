@@ -1,17 +1,16 @@
-import { GuildChannel, Message, MessageActionRow, MessageComponentInteraction, MessageSelectMenu, Snowflake, VoiceChannel } from "discord.js";
-import { Command, PieceContext } from '@sapphire/framework';
+import { Message, MessageActionRow, MessageComponentInteraction, MessageSelectMenu, Snowflake, VoiceChannel } from "discord.js";
+import { Command, PieceContext, CommandOptions } from '@sapphire/framework';
 import { APIInvite } from 'discord-api-types/v8';
 import activity from "../util/activityFetch";
+import { ApplyOptions } from "@sapphire/decorators";
 
+
+@ApplyOptions<CommandOptions>({ 
+	name: 'activity',
+	description: 'start a youtube together session',
+	aliases: ['activity', 'activities', 'ytt']
+})
 export default class extends Command {
-	constructor(context: PieceContext) {
-		super(context, {
-			name: 'activity',
-			description: 'start a youtube together session',
-			aliases: ['activity', 'activities', 'ytt']
-		});
-	}
-
 	async run(message: Message) {
 		if(message.guild?.me) {
 			const member = message.guild.me;
