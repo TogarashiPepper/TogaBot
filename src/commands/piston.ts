@@ -1,4 +1,4 @@
-import { Message, MessageAttachment, MessageEmbed } from 'discord.js';
+import { Message, MessageAttachment, MessageEmbed, MessageButton } from 'discord.js';
 import { Args, Command, PieceContext } from '@sapphire/framework';
 import { Stopwatch } from '@sapphire/stopwatch';
 import { inspect } from 'util';
@@ -77,7 +77,8 @@ export default class extends Command {
 					.setFooter(`Time taken: ${timed}`);
 				if(fetched.stdout.length > 4000) {
 					const file = new MessageAttachment(Buffer.from(`${fetched.stdout}`), 'piston.txt');
-					await message.reply({ content: 'output was too long to fit into an embed to it has been converted to a file', files: [file] });
+					const button = new MessageButton().setLabel('delete').setCustomId('delete').setStyle('PRIMARY');
+					await message.reply({ content: 'output was too long to fit into an embed to it has been converted to a file', files: [file], components: [{ type: 'ACTION_ROW', components: [button] }] });
 				}
 				else{
 					await message.reply({ embeds: [resultEmbed] });

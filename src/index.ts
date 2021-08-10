@@ -12,7 +12,7 @@ const client = new SapphireClient({
 	},
 });
 
-client.on('ready', () => {
+client.once('ready', () => {
 	"TogaBot is online" |>> console.log;
 });
 
