@@ -1,5 +1,5 @@
 import { SapphireClient } from '@sapphire/framework';
-import { Interaction, Message, MessageButton, MessageButtonStyle } from 'discord.js';
+import { GuildMember, Interaction, Message, MessageButton, MessageButtonStyle, MessageEmbed } from 'discord.js';
 import { token } from './config.json';
 
 const client = new SapphireClient({
@@ -39,6 +39,17 @@ client.on('interactionCreate', (interaction: Interaction) => {
 	}
 	else if(interaction.isButton()) {
 		if(interaction.user.id === '779403924850343947') (interaction.message as Message).delete();
+	}
+	else if(interaction.isContextMenu()) {
+		const user = interaction.options.getMember('user', true) as GuildMember;
+		const embed = new MessageEmbed()
+			.setTitle(`${user}'s profile`)
+			.setDescription(`
+			bot: ${user.user.bot}
+			createdAt: ${user.user.createdAt.toUTCString()} or <t:${user.user.createdTimestamp / 1000}:R>
+			discriminator: ${user.user.discriminator}`)
+			.setThumbnail(user.user.displayAvatarURL({ size: 2048, dynamic: true }))
+		interaction.reply({ ephemeral: true, embeds: [embed] });
 	}
 });
 
