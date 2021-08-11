@@ -42,12 +42,16 @@ client.on('interactionCreate', (interaction: Interaction) => {
 	}
 	else if(interaction.isContextMenu()) {
 		const user = interaction.options.getMember('user', true) as GuildMember;
+		const arr: string[] = [];
+		user.roles.cache.forEach(e => arr.push(e.toString()));
 		const embed = new MessageEmbed()
 			.setTitle(`${user.user.username}'s profile`)
 			.setDescription(`
 			bot: ${user.user.bot}
-			createdAt: <t:${Math.floor(user.user.createdTimestamp / 1000)}:F> or <t:${Math.floor(user.user.createdTimestamp / 1000)}:R>
-			discriminator: ${user.user.discriminator}`)
+			created at: <t:${Math.floor(user.user.createdTimestamp / 1000)}:F> or <t:${Math.floor(user.user.createdTimestamp / 1000)}:R>
+			discriminator: ${user.user.discriminator}
+			joined at: <t:${Math.floor(user.joinedTimestamp! / 1000)}:F> or <t:${Math.floor(user.joinedTimestamp! / 1000)}:R>
+			roles: ${arr}`)
 			.setThumbnail(user.user.displayAvatarURL({ size: 2048, dynamic: true }))
 		interaction.reply({ ephemeral: true, embeds: [embed] });
 	}
