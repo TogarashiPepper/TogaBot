@@ -18,7 +18,7 @@
     "@types/ms": "^0.7.31",
     "cheerio": "^1.0.0-rc.10",
     "discord-akairo": "^8.1.0",
-    "discord.js": "github:monbrey/discord.js#context-menus",
+    "discord.js": "^13.1.0-dev",
     "he": "^1.2.0",
     "mongoose": "^5.12.13",
     "ms": "^2.1.3",
