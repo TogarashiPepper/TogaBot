@@ -1,6 +1,6 @@
 import { SapphireClient } from '@sapphire/framework';
 import { GuildMember, Interaction, Message, MessageButton, MessageButtonStyle, MessageEmbed } from 'discord.js';
-import { token } from './config.json';
+import { token } from '../config.json';
 
 const client = new SapphireClient({
 	defaultPrefix: '?',
