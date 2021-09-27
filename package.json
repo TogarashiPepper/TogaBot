@@ -3,39 +3,26 @@
   "version": "1.0.0",
   "description": "",
   "main": "build/index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@sapphire/decorators": "^2.2.0",
-    "@sapphire/discord.js-utilities": "^3.0.0-next.600390f4.0",
     "@sapphire/framework": "^1.0.2",
     "@sapphire/stopwatch": "^1.1.4",
-    "@sapphire/utilities": "^2.0.1",
-    "@types/ms": "^0.7.31",
-    "cheerio": "^1.0.0-rc.10",
-    "discord-akairo": "^8.1.0",
-    "discord.js": "^13.1.0-dev",
+    "discord.js": "^13.2.0-dev.1632701100.79b1b20",
     "he": "^1.2.0",
-    "mongoose": "^5.12.13",
-    "ms": "^2.1.3",
-    "murmurhash-v3": "^1.0.2",
     "node-fetch": "^2.6.1",
-    "totp-generator": "^0.0.9",
-    "turndown": "^7.1.1"
+    "npm": "^7.24.1"
   },
   "devDependencies": {
     "@commitlint/cli": "^12.1.4",
     "@commitlint/config-angular": "^12.1.4",
     "@types/he": "^1.1.1",
-    "@types/node-fetch": "^2.5.11",
-    "@types/turndown": "^5.0.1",
+    "@types/node-fetch": "^2.5.12",
     "@typescript-eslint/eslint-plugin": "^4.28.3",
     "@typescript-eslint/parser": "^4.28.3",
     "eslint": "^7.30.0",
-    "typescript": "npm:@typescript-deploys/pr-build@4.3.0-pr-43617-7"
+    "typescript": "^4.5.0-dev.20210926"
   }
 }

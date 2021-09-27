@@ -1,5 +1,5 @@
 function shuffle(array: unknown[]) {
-	let currentIndex = array.length,  randomIndex;
+	let currentIndex = array.length, randomIndex;
   
 	// While there remain elements to shuffle...
 	while (0 !== currentIndex) {

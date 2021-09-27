@@ -1,7 +1,7 @@
-import { Message, MessageActionRow, MessageComponentInteraction, MessageSelectMenu, Snowflake, VoiceChannel } from "discord.js";
-import { Command, PieceContext, CommandOptions } from '@sapphire/framework';
-import { APIInvite } from 'discord-api-types/v8';
-import activity from "../util/activityFetch";
+import { Message, MessageActionRow, MessageComponentInteraction, MessageSelectMenu, Snowflake } from "discord.js";
+import { Command, CommandOptions } from '@sapphire/framework';
+import { APIInvite } from 'discord-api-types/v9';
+import { activity } from "../util/activityFetch";
 import { ApplyOptions } from "@sapphire/decorators";
 
 
@@ -31,8 +31,8 @@ export default class extends Command {
 			collector.on('collect', (interaction: MessageComponentInteraction) => {
 				if(interaction.isSelectMenu()){
 					if(channel?.type === "GUILD_VOICE") {
-						activity(channel, interaction.values?.join('') as Snowflake)
-						.then((res) => res.json()).then((i: APIInvite) => interaction.update({ content: `https://discord.gg/${i.code}`, components: [] }));
+						activity(interaction.client, channel, interaction.values?.join('') as Snowflake)
+						.then((invite) => interaction.update({ content: `https://discord.gg/${invite.code}`, components: [] }));
 					}
 				}
 			});

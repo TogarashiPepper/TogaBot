@@ -13,16 +13,14 @@ export default class extends Command {
 		});
 	}
 
-	async run(message: Message, args: Args): Promise<void> {
+	async run(message: Message, args: Args) {
 		if(message.author.id === '779403924850343947') {
 			const delButton = createButton(message.author.id, 'delete');
 			const row = new MessageActionRow().addComponents(delButton);
 
 			try {
 				let result;
-				result = args.getFlags('async') ? message.content.split(' ').slice(2).join(' ') : message.content.split(' ').slice(1).join(' ')
-				// if(message.content.match(flagregex)) {
-				// message.flags.push(message.content.match(flagregex)[0]);
+				result = args.getFlags('async') ? message.content.split(' ').slice(2).join(' ') : message.content.split(' ').slice(1).join(' ');
 				let evaled;
 				if(args.getFlags('async')) {
 					evaled = await eval('(async () => {' + result + '})()');
@@ -39,7 +37,6 @@ export default class extends Command {
 					const file = new MessageAttachment(Buffer.from(`${evaled}`), 'eval.js');
 					message.channel.send({ content: 'the result of eval was over 2000 characters so it has been converted to a file', files: [file], components: [row] });
 				}
-				// }
 			}
 			catch (err) {
 				const result = message.content.split(' ').slice(1).join(' ');

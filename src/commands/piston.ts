@@ -24,7 +24,7 @@ export default class extends Command {
 		});
 	}
 
-	async run(message: Message, sapphireArgs: Args): Promise<void> {
+	async run(message: Message, sapphireArgs: Args) {
 		const args = (await sapphireArgs.rest('string')).replace(/\n/g, ' ').split(/ +/);
 		const lang = args.shift()?.slice(3);
 		const code = message.content.match(/```[a-zA-Z+]*\n([\s\S]*?)```/);
