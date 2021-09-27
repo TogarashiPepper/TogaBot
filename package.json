@@ -10,7 +10,7 @@
     "@sapphire/decorators": "^2.2.0",
     "@sapphire/framework": "^1.0.2",
     "@sapphire/stopwatch": "^1.1.4",
-    "discord.js": "github:discordjs/discord.js#79b1b2056294d25a6f3836b1b281fac4c42d65ea",
+    "discord.js": "^13.2.0-dev.1632701100.79b1b20",
     "he": "^1.2.0",
     "node-fetch": "^2.6.1",
     "npm": "^7.24.1"
