@@ -13,7 +13,7 @@ const client = new SapphireClient({
 });
 
 client.once('ready', () => {
-	"TogaBot is online" |>> console.log;
+	console.log("TogaBot is online");
 });
 
 client.on('interactionCreate', (interaction: Interaction) => {
@@ -57,22 +57,13 @@ client.on('interactionCreate', (interaction: Interaction) => {
 	}
 });
 
-client.on('messageUpdate', async (oldMessage, newMessage): Promise<void> => {
+client.on('messageUpdate', async (oldMessage, newMessage) => {
 	if(newMessage.content === oldMessage.content) return;
 	if(oldMessage.partial || newMessage.partial) {
 		await newMessage.fetch();
 		await oldMessage.fetch();
-		client.emit('message', newMessage as Message);
 	}
-	else {
-		client.emit('message', newMessage as Message);
-	}
+	client.emit('message', newMessage as Message);
 });
-
-declare module '@sapphire/pieces' {
-	interface Container {
-		owo: string
-	}
-}
 
 client.login(token);

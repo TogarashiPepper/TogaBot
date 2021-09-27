@@ -10,7 +10,7 @@ export default class extends Command {
 		});
 	}
 
-	async run(message: Message): Promise<void> {
+	async run(message: Message) {
 		const commandMap = this.context.stores.get('commands');
 		const commands: string[] = [];
 		commandMap.forEach(command => commands.push(`**${command.name}**\n${command.description}\n`));

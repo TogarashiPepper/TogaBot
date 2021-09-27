@@ -10,11 +10,11 @@ export default class extends Command {
 		});
 	}
 
-	async run(message: Message, args: Args): Promise<Message> {
-		const member = await args.pick('member').catch(() => {
-			return message.member as GuildMember;
+	async run(message: Message, args: Args) {
+		const user = await args.pick('user').catch(() => {
+			return message.author;
 		});
-		return message.reply(member.user.displayAvatarURL({ size:2048, dynamic: true }));
+		return message.reply(user.displayAvatarURL({ size:4096, dynamic: true }));
 	}
 }
 

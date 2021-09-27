@@ -1,5 +1,5 @@
-import { Message, MessageEmbed, MessageSelectMenu, MessageActionRow, MessageComponentInteraction, Collection } from "discord.js";
-import { Command, Identifiers, PieceContext } from '@sapphire/framework';
+import { Message, MessageEmbed, MessageSelectMenu, MessageActionRow, MessageComponentInteraction } from "discord.js";
+import { Command, PieceContext } from '@sapphire/framework';
 import triviaFetch from '../util/triviaFetch'
 import arrayShuffle from '../util/arrayShuffle';
 import { decode } from 'he';
@@ -27,7 +27,7 @@ export default class extends Command {
 	}
 
 	async run(message: Message) {
-		const response: response = await triviaFetch('https://opentdb.com/api.php?amount=1');
+		let response: response = await triviaFetch('https://opentdb.com/api.php?amount=1');
 		const arrOfAnswers = response.results[0].incorrect_answers;
 		arrOfAnswers.push(response.results[0].correct_answer);
 		arrayShuffle(arrOfAnswers);
